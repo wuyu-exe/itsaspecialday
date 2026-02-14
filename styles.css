@@ -1,0 +1,462 @@
+:root{
+  --bg1:#090a12;
+  --bg2:#0b1220;
+  --card: rgba(255,255,255,.08);
+  --card2: rgba(255,255,255,.06);
+  --text:#f4f4f6;
+  --muted: rgba(244,244,246,.72);
+  --border: rgba(255,255,255,.12);
+
+  --good:#24d18f;
+  --mid:#f7c948;
+  --bad: rgba(255,255,255,.22);
+
+  --accent:#ff4d7d;
+  --accent2:#ff7bb0;
+
+  --shadow: 0 18px 55px rgba(0,0,0,.42);
+  --radius: 18px;
+  --max: 980px;
+
+  --tile: 58px;
+  --gap: 10px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  color:var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  background:
+    radial-gradient(1100px 520px at 15% 0%, rgba(255,77,125,.22), transparent 55%),
+    radial-gradient(900px 520px at 90% 12%, rgba(255,123,176,.16), transparent 55%),
+    radial-gradient(900px 520px at 50% 120%, rgba(36,209,143,.14), transparent 58%),
+    linear-gradient(160deg, var(--bg1), var(--bg2));
+  overflow-x:hidden;
+}
+
+.bg-hearts{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,.10) 0 2px, transparent 3px),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,.08) 0 2px, transparent 3px),
+    radial-gradient(circle at 30% 70%, rgba(255,255,255,.06) 0 2px, transparent 3px);
+  opacity:.8;
+  filter: blur(.2px);
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter: blur(12px);
+  background: rgba(9,10,18,.55);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{ display:flex; gap:10px; align-items:center; }
+.logo{ font-size:20px; }
+.title{ font-weight:700; letter-spacing:.2px; }
+
+.icon-btn{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color:var(--text);
+  width:38px; height:38px;
+  border-radius: 12px;
+  cursor:pointer;
+  box-shadow: var(--shadow);
+}
+.icon-btn:hover{ transform: translateY(-1px); }
+
+.wrap{
+  width:min(var(--max), 92vw);
+  margin: 22px auto 60px;
+  display:grid;
+  gap:16px;
+}
+
+.card{
+  border:1px solid var(--border);
+  background: linear-gradient(180deg, var(--card), var(--card2));
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+.card-head{ margin-bottom: 12px; }
+.h1{
+  margin:0;
+  font-size: clamp(1.6rem, 3.3vw, 2.2rem);
+  letter-spacing:.2px;
+}
+.sub{
+  margin: 6px 0 0;
+  color: var(--muted);
+  line-height:1.4;
+}
+.sub.big{ font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: rgba(244,244,246,.86); }
+
+.center{ text-align:center; }
+
+.toast{
+  min-height: 20px;
+  margin: 8px 0 10px;
+  color: rgba(255,255,255,.88);
+  font-weight: 600;
+}
+
+.board{
+  display:grid;
+  gap: var(--gap);
+  justify-content:center;
+  padding: 10px 0 16px;
+}
+
+.row{
+  display:grid;
+  grid-template-columns: repeat(5, var(--tile));
+  gap: var(--gap);
+}
+
+.tile{
+  width: var(--tile);
+  height: var(--tile);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.18);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 800;
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  user-select:none;
+  transition: transform .12s ease, background .25s ease, border-color .25s ease;
+}
+
+.tile.filled{ border-color: rgba(255,255,255,.30); }
+.tile.pop{ transform: scale(1.05); }
+
+.tile.good{ background: rgba(36,209,143,.25); border-color: rgba(36,209,143,.75); }
+.tile.mid{ background: rgba(247,201,72,.20); border-color: rgba(247,201,72,.75); }
+.tile.bad{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.18); }
+
+.keyboard{
+  display:grid;
+  gap: 8px;
+  justify-content:center;
+  padding-bottom: 10px;
+}
+
+.krow{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  flex-wrap:nowrap;
+}
+
+.key{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  border-radius: 12px;
+  height: 44px;
+  min-width: 34px;
+  padding: 0 10px;
+  font-weight: 800;
+  cursor:pointer;
+  user-select:none;
+  box-shadow: 0 10px 25px rgba(0,0,0,.25);
+  transition: transform .08s ease, background .2s ease, border-color .2s ease;
+}
+.key:active{ transform: translateY(1px) scale(.99); }
+.key.wide{ min-width: 72px; font-size:.95rem; }
+.key.good{ background: rgba(36,209,143,.22); border-color: rgba(36,209,143,.65); }
+.key.mid{ background: rgba(247,201,72,.18); border-color: rgba(247,201,72,.65); }
+.key.bad{ background: rgba(255,255,255,.10); border-color: rgba(255,255,255,.15); color: rgba(244,244,246,.86); }
+
+.hint-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top: 8px;
+}
+
+.ghost-btn, .btn{
+  border:1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: var(--text);
+  border-radius: 14px;
+  padding: 10px 12px;
+  cursor:pointer;
+  font-weight: 800;
+}
+.ghost-btn:hover, .btn:hover{ transform: translateY(-1px); }
+
+.tiny{ font-size:.92rem; }
+.muted{ color: var(--muted); }
+
+.hidden{ display:none !important; }
+
+.question-area{
+  margin-top: 14px;
+  display:flex;
+  justify-content:center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 10px 0 4px;
+}
+
+.val-btn{
+  border:1px solid rgba(255,255,255,.18);
+  border-radius: 18px;
+  cursor:pointer;
+  padding: 14px 18px;
+  font-weight: 900;
+  letter-spacing:.2px;
+  box-shadow: var(--shadow);
+  transition: transform .12s ease, width .25s ease, height .25s ease, font-size .25s ease;
+}
+
+.val-btn.yes{
+  background: linear-gradient(135deg, rgba(255,77,125,.45), rgba(255,123,176,.25));
+}
+
+.val-btn.no{
+  background: rgba(255,255,255,.06);
+  color: rgba(244,244,246,.92);
+}
+
+.fullscreen-yes{
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  border-radius: 0 !important;
+  z-index: 9999 !important;
+  font-size: clamp(2rem, 6vw, 4rem) !important;
+}
+
+/* Make YES start bigger (script still scales it up further) */
+.obnoxious-yes{
+  font-size: 1.25rem;
+  padding: 16px 24px;
+}
+
+/* ---------- Valentine white mode ---------- */
+body.white-mode{
+  background: #ffffff !important;
+  color: #111111 !important;
+}
+
+body.white-mode .bg-hearts{
+  display:none !important;
+}
+
+body.white-mode .topbar{
+  background: rgba(255,255,255,.85) !important;
+  border-bottom: 1px solid rgba(0,0,0,.08) !important;
+  backdrop-filter: blur(10px);
+}
+
+body.white-mode .icon-btn{
+  background: rgba(0,0,0,.04) !important;
+  border-color: rgba(0,0,0,.10) !important;
+  color: #111 !important;
+  box-shadow: 0 10px 25px rgba(0,0,0,.08) !important;
+}
+
+body.white-mode .card{
+  background: #ffffff !important;
+  border-color: rgba(0,0,0,.10) !important;
+  box-shadow: 0 18px 55px rgba(0,0,0,.10) !important;
+}
+
+body.white-mode .sub,
+body.white-mode .muted{
+  color: rgba(17,17,17,.70) !important;
+}
+
+body.white-mode .val-btn.no{
+  background: rgba(0,0,0,.04) !important;
+  border-color: rgba(0,0,0,.10) !important;
+  color: #111 !important;
+}
+
+body.white-mode .val-btn.yes{
+  border-color: rgba(255,77,125,.35) !important;
+  box-shadow: 0 18px 55px rgba(255,77,125,.18) !important;
+}
+
+/* ---------- Valentine big image (FULL, not cropped) ---------- */
+.val-photo{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: 12px auto 10px;
+  width: 100%;
+}
+
+/* This targets your big image on the middle page and OVERRIDES any older rules */
+#valentineView .val-photo img,
+#valentineView .val-hero-img{
+  width: min(96vw, 1100px) !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important; /* show the whole thing */
+  display:block;
+  margin: 0 auto;
+
+  border-radius: 22px;
+  border: 1px solid rgba(0,0,0,.10);
+  box-shadow: 0 22px 70px rgba(0,0,0,.18);
+  background: rgba(255,255,255,0.65);
+}
+
+/* If you still use a small inline image somewhere */
+.val-inline-img{
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,.10);
+}
+
+.center-btn{ display:block; margin: 16px auto 0; }
+
+/* ---------- Final screen (solid 3-image layout) ---------- */
+.final-solid-screen{
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9990 !important;
+
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  padding: 18px !important;
+  border-radius: 0 !important;
+
+  background: #ffffff !important;
+  color: #111111 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.final-text{
+  text-align: center;
+  margin-top: 6px;
+}
+
+.final-text .sub{
+  color: rgba(17,17,17,.72) !important;
+}
+
+.final-grid{
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.final-grid img{
+  width: 100%;
+  height: 100%;
+  max-height: 58vh;
+  object-fit: contain;
+  background: transparent;
+  opacity: 1;
+}
+
+@media (max-width: 860px){
+  .final-grid{
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+  .final-grid img{
+    max-height: 24vh;
+  }
+}
+
+/* Dark Play Again button near bottom */
+.dark-playagain{
+  align-self: center;
+  margin-bottom: 8px;
+
+  border: 1px solid rgba(0,0,0,.18);
+  background: rgba(0,0,0,.78);
+  color: rgba(255,255,255,.95);
+  border-radius: 16px;
+  padding: 12px 18px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 18px 55px rgba(0,0,0,.20);
+}
+
+.dark-playagain:hover{
+  transform: translateY(-1px);
+}
+
+/* ---------- Help modal ---------- */
+.modal{
+  border:none;
+  padding:0;
+  background: transparent;
+}
+.modal::backdrop{
+  background: rgba(0,0,0,.55);
+  backdrop-filter: blur(6px);
+}
+.modal-inner{
+  width: min(520px, 92vw);
+  margin: 18vh auto 0;
+  border-radius: 18px;
+  border:1px solid var(--border);
+  background: rgba(15,18,30,.92);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  color: var(--text);
+}
+.modal-inner h2{ margin:0 0 8px; }
+.modal-inner ul{ margin: 10px 0 14px; color: rgba(244,244,246,.86); }
+.key-demo{
+  display:inline-block;
+  width:14px; height:14px;
+  border-radius: 4px;
+  margin-right: 6px;
+  vertical-align: -2px;
+}
+.key-demo.good{ background: rgba(36,209,143,.8); }
+.key-demo.mid{ background: rgba(247,201,72,.85); }
+.key-demo.bad{ background: rgba(255,255,255,.22); }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 420px){
+  :root{ --tile: 52px; }
+  .krow{ gap:6px; }
+  .key{ min-width: 30px; height: 42px; padding: 0 8px; }
+  .key.wide{ min-width: 64px; }
+}
+
+/* === FINAL OVERRIDE: Valentine image size + no cropping === */
+#valentineView .val-photo img{
+  width: min(80vw, 850px) !important; /* makes it smaller */
+  height: auto !important;
+  max-height: 50vh !important;       /* controls vertical size */
+  object-fit: contain !important;    /* NEVER crop */
+}

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>mysterious ahh wordle</title>
+  <meta name="description" content="A tiny valentines website with a Wordle surprise." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-hearts" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="title">courtesy of nathan wu :)</span>
+    </div>
+    <button class="icon-btn" id="helpBtn" aria-label="Help">?</button>
+  </header>
+
+  <main class="wrap">
+    <!-- GAME VIEW -->
+    <section id="gameView" class="card" aria-label="Wordle game">
+      <div class="card-head">
+        <h1 class="h1">guess the wordle...</h1>
+      </div>
+
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+      <div class="board" id="board" aria-label="Game board"></div>
+
+      <div class="keyboard" id="keyboard" aria-label="On-screen keyboard"></div>
+
+      <div class="hint-row">
+        <button class="ghost-btn" id="resetBtn" type="button">reset</button>
+      </div>
+    </section>
+
+    <!-- VALENTINE VIEW -->
+    <section id="valentineView" class="card white-card hidden" aria-label="Valentine question">
+      <div class="card-head center">
+        <h1 class="h1">AMBER</h1>
+        <p class="sub big">will you be my valentine? ♡(◍•ᴗ•◍)✧*。</p>
+      </div>
+
+      <!-- BIG picture (show full image, not cropped) -->
+      <div class="val-photo huge" aria-label="Photo">
+        <img
+          class="val-hero-img"
+          src="milkmochaflower.jpg"
+          alt="Milk Mocha holding a flower"
+          loading="eager"
+        />
+      </div>
+
+      <div class="question-area">
+        <button id="yesBtn" class="val-btn yes obnoxious-yes" type="button">yes 🥰</button>
+        <button id="noBtn" class="val-btn no" type="button">no 😅</button>
+      </div>
+
+      <p class="tiny muted center" id="noHint" aria-live="polite"></p>
+    </section>
+
+    <!-- FINAL VIEW (TEXT + 3 GIFS, SOLID, ORIGINAL FORMAT) -->
+    <section id="finalView" class="card hidden final-solid-screen" aria-label="Celebration screen">
+      <div class="final-text">
+        <h1 class="h1">yayyyyyy!!</h1>
+        <p class="sub big">i knew you would say yes :D</p>
+      </div>
+
+      <div class="final-grid" aria-label="Celebration gifs">
+        <img src="milkmochahug.gif" alt="Milk Mocha hug" loading="eager" />
+        <img src="milkmocharose.gif" alt="Milk Mocha rose" loading="eager" />
+        <img src="mwah-cat-rose.gif" alt="Cat mwah rose" loading="eager" />
+      </div>
+
+      <button class="dark-playagain" id="playAgainBtn" type="button">play again</button>
+    </section>
+  </main>
+
+  <!-- HELP MODAL -->
+  <dialog id="helpModal" class="modal">
+    <div class="modal-inner"> 
+      <h2>how to play</h2>
+      <ul>
+        <li>type a 5-letter guess.</li>
+        <li><span class="key-demo good"></span> green = correct letter, correct spot</li>
+        <li><span class="key-demo mid"></span> yellow = correct letter, wrong spot</li>
+        <li><span class="key-demo bad"></span> gray = not in the word</li>
+      </ul>
+      <button class="btn" id="closeHelp" type="button">got it</button>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
