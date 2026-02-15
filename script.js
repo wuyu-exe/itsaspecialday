@@ -1,7 +1,6 @@
 (() => {
-  // ----------------------------
-  // Wordle config
-  // ----------------------------
+
+  // wordle config
   const ANSWER = "amber";
   const WORD_LEN = 5;
   const MAX_TRIES = 6;
@@ -12,9 +11,8 @@
     "roses","glove","flirt","kissy","blush","smile","spark","tulip"
   ]);
 
-  // ----------------------------
-  // Elements
-  // ----------------------------
+  // elements
+
   const boardEl = document.getElementById("board");
   const keyboardEl = document.getElementById("keyboard");
   const toastEl = document.getElementById("toast");
@@ -35,9 +33,8 @@
 
   const photoFallback = document.getElementById("photoFallback");
 
-  // ----------------------------
-  // State
-  // ----------------------------
+  // state
+
   let row = 0;
   let col = 0;
   let grid = Array.from({ length: MAX_TRIES }, () => Array(WORD_LEN).fill(""));
@@ -49,9 +46,8 @@
   let noScale = 1;
   let noGone = false;
 
-  // ----------------------------
-  // Build UI
-  // ----------------------------
+  // build UI
+
   function buildBoard() {
     boardEl.innerHTML = "";
     for (let r = 0; r < MAX_TRIES; r++) {
@@ -109,9 +105,8 @@
     }, 1100);
   }
 
-  // ----------------------------
-  // Input handling
-  // ----------------------------
+  // input handling
+
   function onKey(k) {
     if (locked) return;
 
@@ -183,13 +178,13 @@
     }
   }
 
-  // Wordle-like evaluation with duplicates handled
+  // wordle eval
   function evaluateGuess(guess, answer) {
     const res = Array(WORD_LEN).fill("bad");
     const a = answer.split("");
     const g = guess.split("");
 
-    // Greens
+    // greens
     for (let i = 0; i < WORD_LEN; i++) {
       if (g[i] === a[i]) {
         res[i] = "good";
@@ -197,7 +192,7 @@
         g[i] = null;
       }
     }
-    // Yellows
+    // yellows
     for (let i = 0; i < WORD_LEN; i++) {
       if (g[i] == null) continue;
       const j = a.indexOf(g[i]);
@@ -242,15 +237,11 @@
     }
   }
 
-  // ----------------------------
-  // Transitions
-  // ----------------------------
+  // transitions
+
   function transitionToValentine() {
-    // Switch whole page to white mode
     document.body.classList.add("white-mode");
 
-    // If the photo loaded, hide the fallback line
-    // (If it doesn't load, index.html already hides the <img>)
     const img = valentineView.querySelector("img");
     if (img && img.complete && img.naturalWidth > 0) {
       if (photoFallback) photoFallback.style.display = "none";
@@ -263,16 +254,13 @@
   }
 
   function transitionToFinal() {
-    // Keep white mode (still looks nice); remove this line if you want dark again
     document.body.classList.add("white-mode");
 
     valentineView.classList.add("hidden");
     finalView.classList.remove("hidden");
   }
 
-  // ----------------------------
-  // Yes/No behavior
-  // ----------------------------
+  // yes/no behavior
   function initYesNo() {
     noClicks = 0;
     yesScale = 1;
@@ -288,7 +276,7 @@
     noBtn.style.opacity = "1";
     noBtn.style.pointerEvents = "auto";
 
-    // YES is the only way to proceed
+    // yes proceed
     yesBtn.onclick = () => transitionToFinal();
 
     noBtn.onclick = (e) => {
@@ -297,7 +285,7 @@
 
       noClicks++;
 
-      // Shrink "No", grow "Yes"
+      // shrink "no", grow "yes"
       noScale = Math.max(0.05, 1 - noClicks * 0.18);
       yesScale = 1 + noClicks * 0.22;
 
@@ -313,14 +301,12 @@
       ];
       noHint.textContent = messages[Math.min(noClicks - 1, messages.length - 1)];
 
-      // Once No gets small enough: it's gone (but do NOT advance)
       if (noScale <= 0.22) {
         noGone = true;
         noBtn.style.display = "none";
         noHint.textContent = "only one choice left (◕‿-)";
       }
 
-      // Make YES huge (still requires a click)
       if (yesScale >= 3.0) {
         yesBtn.classList.add("fullscreen-yes");
         yesBtn.textContent = "YES <3 ";
@@ -329,11 +315,9 @@
     };
   }
 
-  // ----------------------------
-  // Reset
-  // ----------------------------
+  // reset
+
   function resetGame() {
-    // Back to dark mode for the Wordle
     document.body.classList.remove("white-mode");
 
     row = 0;
@@ -353,9 +337,7 @@
     gameView.classList.remove("hidden");
   }
 
-  // ----------------------------
-  // Keyboard (physical)
-  // ----------------------------
+  // keyboard
   window.addEventListener("keydown", (ev) => {
     if (helpModal.open) return;
 
@@ -365,9 +347,9 @@
     else if (/^[a-z]$/.test(k)) onKey(k);
   });
 
-  // ----------------------------
-  // Help modal
-  // ----------------------------
+
+  // help modal
+
   helpBtn.addEventListener("click", () => helpModal.showModal());
   closeHelp.addEventListener("click", () => helpModal.close());
   helpModal.addEventListener("click", (e) => {
@@ -381,9 +363,8 @@
   resetBtn.addEventListener("click", resetGame);
   playAgainBtn.addEventListener("click", resetGame);
 
-  // ----------------------------
-  // Init
-  // ----------------------------
+  // init
+
   buildBoard();
   buildKeyboard();
   showToast("");

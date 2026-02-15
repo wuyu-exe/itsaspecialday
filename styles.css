@@ -247,13 +247,13 @@ body{
   font-size: clamp(2rem, 6vw, 4rem) !important;
 }
 
-/* Make YES start bigger (script still scales it up further) */
+/* yes big */
 .obnoxious-yes{
   font-size: 1.25rem;
   padding: 16px 24px;
 }
 
-/* ---------- Valentine white mode ---------- */
+/* white mode */
 body.white-mode{
   background: #ffffff !important;
   color: #111111 !important;
@@ -298,7 +298,7 @@ body.white-mode .val-btn.yes{
   box-shadow: 0 18px 55px rgba(255,77,125,.18) !important;
 }
 
-/* ---------- Valentine big image (FULL, not cropped) ---------- */
+/* valentine image */
 .val-photo{
   display:flex;
   justify-content:center;
@@ -307,13 +307,12 @@ body.white-mode .val-btn.yes{
   width: 100%;
 }
 
-/* This targets your big image on the middle page and OVERRIDES any older rules */
 #valentineView .val-photo img,
 #valentineView .val-hero-img{
   width: min(96vw, 1100px) !important;
   height: auto !important;
   max-height: none !important;
-  object-fit: contain !important; /* show the whole thing */
+  object-fit: contain !important;
   display:block;
   margin: 0 auto;
 
@@ -323,7 +322,6 @@ body.white-mode .val-btn.yes{
   background: rgba(255,255,255,0.65);
 }
 
-/* If you still use a small inline image somewhere */
 .val-inline-img{
   width: 64px;
   height: 64px;
@@ -334,7 +332,7 @@ body.white-mode .val-btn.yes{
 
 .center-btn{ display:block; margin: 16px auto 0; }
 
-/* ---------- Final screen (solid 3-image layout) ---------- */
+/* final screen */
 .final-solid-screen{
   position: fixed !important;
   inset: 0 !important;
@@ -393,7 +391,7 @@ body.white-mode .val-btn.yes{
   }
 }
 
-/* Dark Play Again button near bottom */
+/* play again */
 .dark-playagain{
   align-self: center;
   margin-bottom: 8px;
@@ -412,7 +410,7 @@ body.white-mode .val-btn.yes{
   transform: translateY(-1px);
 }
 
-/* ---------- Help modal ---------- */
+/* help modal */
 .modal{
   border:none;
   padding:0;
@@ -445,7 +443,7 @@ body.white-mode .val-btn.yes{
 .key-demo.mid{ background: rgba(247,201,72,.85); }
 .key-demo.bad{ background: rgba(255,255,255,.22); }
 
-/* ---------- Small screens ---------- */
+/* small screens */
 @media (max-width: 420px){
   :root{ --tile: 52px; }
   .krow{ gap:6px; }
@@ -453,10 +451,9 @@ body.white-mode .val-btn.yes{
   .key.wide{ min-width: 64px; }
 }
 
-/* === FINAL OVERRIDE: Valentine image size + no cropping === */
 #valentineView .val-photo img{
-  width: min(80vw, 850px) !important; /* makes it smaller */
+  width: min(80vw, 850px) !important;
   height: auto !important;
-  max-height: 50vh !important;       /* controls vertical size */
-  object-fit: contain !important;    /* NEVER crop */
+  max-height: 50vh !important;
+  object-fit: contain !important;
 }
